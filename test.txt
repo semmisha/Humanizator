@@ -1,0 +1,3 @@
+VRD_CarSale=Машина_Продажа
+VRD_ID_CarSale=Машина_Продажа_ID
+VRD_InsuranceActDet=Страховка_акт

@@ -29,11 +29,11 @@ func ReadSQLFile(fspath string, logger *logrus.Logger) string {
 		words := strings.Fields(fileBody.Text())
 		for i := range words {
 
-			if i < len(words)-1 && reflect.DeepEqual(strings.ToLower(words[i+1]), "on") {
+			if i < len(words)-3 && reflect.DeepEqual(strings.ToLower(words[i]), "join") {
 
-				aliasMap[fmt.Sprint(words[i], ".")] = fmt.Sprint(words[i-1], ".")
+				aliasMap[fmt.Sprint(words[i+2], ".")] = fmt.Sprint(words[i+1], ".")
 
-				words[i] = ""
+				words[i+2] = ""
 			} else if i < len(words)-3 && reflect.DeepEqual(strings.ToLower(words[i]), "from") {
 				aliasMap[fmt.Sprint(words[i+2], ".")] = fmt.Sprint(words[i+1], ".")
 

@@ -1,9 +1,9 @@
 package main
 
 import (
-	tableComarsion2 "MTtoHT/controllers/fs/requestFile"
-	"MTtoHT/controllers/fs/tableComarsion"
-	"MTtoHT/logging"
+	tableComarsion2 "Humanitazer/controllers/fs/requestFile"
+	"Humanitazer/controllers/fs/tableComarsion"
+	"Humanitazer/logging"
 	"fmt"
 	"os"
 	"os/exec"
@@ -20,7 +20,7 @@ func main() {
 	comm.Stdout = os.Stdout
 
 	knowbase := tableComarsion.ReadTableComparsionFile("testData/sql_formated3.txt", logger)
-	request := tableComarsion2.ReadSQLFile("testData/sql.txt", logger)
+	request := tableComarsion2.ReadSQLFile("testData/sql_prolong.txt", logger)
 	requestString := strings.ToLower(request)
 
 	for i, _ := range knowbase {

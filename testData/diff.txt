@@ -1,0 +1,22 @@
+20,21c20,21
+< nickname = 'ilya'
+< cohort = '1'
+---
+> nickname = 
+> cohort = 
+90,91c90
+<     df.drop_duplicates(subset=['id'], inplace=True)
+<     df.drop(columns=['id'], inplace=True)
+---
+>     df.drop_duplicates(subset=['id'])
+159,165d157
+<     update_f_customer_retention = PostgresOperator(
+<         task_id='update_f_customer_retention',
+<         postgres_conn_id=postgres_conn_id,
+<         sql="sql/mart.f_customer_retention.sql",
+<         parameters={"date": {business_dt}}
+<     )
+< 
+173d164
+<             >> update_f_customer_retention
+Files /Users/semmisha/etl_project3.py and /Users/semmisha/sprint3.py differ

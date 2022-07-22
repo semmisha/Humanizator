@@ -1,37 +1,25 @@
 package main
 
 import (
-	tableComarsion2 "Humanitazer/controllers/fs/requestFile"
-	"Humanitazer/controllers/fs/tableComarsion"
-	"Humanitazer/logging"
-	"fmt"
-	"os"
-	"os/exec"
-	"strings"
+	router2 "Humanizator/http/router"
+	"Humanizator/logging"
 )
 
 func main() {
-	// Read comparsion file
-	// Read script file
-	// Compare
-	// Write to new file
-	logger := logging.Logger()
-	comm := exec.Command("clear")
-	comm.Stdout = os.Stdout
+	var (
+		logger = logging.Logger
+		router = router2.NewRouter(logger())
+	)
+	router.Setup()
 
-	knowbase := tableComarsion.ReadTableComparsionFile("testData/sql_formated3.txt", logger)
-	request := tableComarsion2.ReadSQLFile("testData/sql_prolong.txt", logger)
-	requestString := strings.ToLower(request)
+	// TODO ----- controller ----- //
+	//controller.ReadData("testData/sql.txt")
+	//controller.ReadKB("testData/sql_formated3.txt")
+	//
+	////TODO ----- UseCases -----//
+	//
+	//ucData.ProcessTableAlias()
+	//ucData.Process()
 
-	for i, _ := range knowbase {
-
-		requestString = strings.ReplaceAll(requestString, i, knowbase[i])
-
-	}
-	fmt.Println(requestString)
-
+	//logger.Printf("\n\n\n%v\n\n\n", ucData.Data)
 }
-
-//inner join table alias on
-
-//from table alias

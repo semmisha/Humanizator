@@ -5804,3 +5804,7 @@ winuser=winuser
 x_user=users
 carsales=продажи_автомобили
 paymethods=методы_оплаты
+usedcars=автомобили_с_пробегом
+buyprice=цена_продажи
+carsales=продажи_автомобилей
+paymethod=метод_оплаты

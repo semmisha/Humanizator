@@ -1,8 +1,9 @@
-package router
+package httpRouter
 
 import "github.com/sirupsen/logrus"
 
 type Router struct {
-	Data   chan string
+	Data   string
+	Env    map[string]string
 	logger *logrus.Logger
 }

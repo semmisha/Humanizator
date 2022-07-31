@@ -6,19 +6,28 @@ import (
 	"Humanizator/output/fs"
 	"Humanizator/usecases"
 	"bytes"
-	"fmt"
 	"github.com/sirupsen/logrus"
 )
 
 func ProcessWeb(str string, env map[string]string, logger *logrus.Logger) []byte {
 	var (
-		controller = web.NewWeb(logger)
-		ucData     = usecases.NewUCProcess(logger)
-		stData     = fs.NewStorage(logger)
+		controller = web.NewWebVar(env, logger)
+		ucData     = usecases.NewUCProcessVar(env, logger)
+		stData     = fs.NewStorageVar(env, logger)
 	)
 
-	ucData.Data, ucData.KBData = input.Input(controller).ReadKB("./testData/sql.txt").ReadData(str).Export()
-	stData.Data = usecases.UC(ucData).ProcessTableAlias().Process().Export()
-	fmt.Println(stData.Data)
+	// TODO ----- Controller Logic -----//
+	input.Input(controller).ReadKB(env["kbpath"]).ReadVRDKB(env["kbvrdpath"]).ReadData(str)
+
+	ucData.Data, ucData.KBData, ucData.KBVRDData = input.Input(controller).Export()
+
+	// TODO ----- UsesCase Logic -----//
+
+	usecases.UC(ucData).ProcessTableAlias().ProcessVRD().Process()
+
+	stData.Data = usecases.UC(ucData).Export()
+
+	//TODO ----- Return -----//
+
 	return bytes.NewBufferString(stData.Data).Bytes()
 }

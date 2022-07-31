@@ -3,7 +3,9 @@ package fs
 import "github.com/sirupsen/logrus"
 
 type FS struct {
-	Data   string
-	KBData map[string]string
-	logger *logrus.Logger
+	Env       map[string]string
+	Data      string
+	KBData    map[string]string
+	KBVRDData map[string]string
+	logger    *logrus.Logger
 }

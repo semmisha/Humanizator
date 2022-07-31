@@ -6,15 +6,10 @@ import (
 )
 
 type Web struct {
-	Data   string
-	KBData map[string]string
-	client *http.Client
-	logger *logrus.Logger
-}
-
-func NewWeb(logger *logrus.Logger) *Web {
-	return &Web{
-
-		logger: logger,
-	}
+	Env       map[string]string
+	Data      string
+	KBData    map[string]string
+	KBVRDData map[string]string
+	client    *http.Client
+	logger    *logrus.Logger
 }

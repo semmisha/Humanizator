@@ -1,25 +1,23 @@
 package main
 
 import (
-	router2 "Humanizator/http/router"
+	"Humanizator/config"
+	"Humanizator/http/httpRouter"
 	"Humanizator/logging"
 )
 
+// TODO ----- Add additional checking file with vrd_ and file without
+const (
+	envPath = "data/env.conf"
+)
+
+var (
+	logger = logging.Logger()
+)
+
 func main() {
-	var (
-		logger = logging.Logger
-		router = router2.NewRouter(logger())
-	)
+	EnvMap := config.GetEnv(envPath, logger)
+	router := httpRouter.NewRouterVar("", EnvMap, logger)
 	router.Setup()
 
-	// TODO ----- controller ----- //
-	//controller.ReadData("testData/sql.txt")
-	//controller.ReadKB("testData/sql_formated3.txt")
-	//
-	////TODO ----- UseCases -----//
-	//
-	//ucData.ProcessTableAlias()
-	//ucData.Process()
-
-	//logger.Printf("\n\n\n%v\n\n\n", ucData.Data)
 }

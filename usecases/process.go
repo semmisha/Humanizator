@@ -9,10 +9,9 @@ import (
 	"strings"
 )
 
-func NewUCProcess(logger *logrus.Logger) *UCProcess {
+func NewUCProcessVar(env map[string]string, logger *logrus.Logger) *UCProcess {
 	return &UCProcess{Logger: logger}
 }
-
 func (t *UCProcess) ProcessTableAlias() UC {
 
 	var (
@@ -38,29 +37,52 @@ func (t *UCProcess) ProcessTableAlias() UC {
 				}
 			}
 		}
+
 		t.Data = tString.String()
 
 	} else {
-		logger.Errorf("Unable to proceed %v, t.Data or/and T.KBData is empty", runtime.Frame{}.Func)
+		logger.Fatalf("Unable to proceed %v, t.Data or/and T.KBData is empty", runtime.Frame{}.Func)
 
 	}
 	return t
 }
-
 func (t *UCProcess) Process() UC {
-	for key, value := range t.KBData {
+	var (
+		logger = t.Logger
+		data   = t.KBData
+	)
+	if len(data) == 0 {
+		logger.Fatalf("\n  t.KBData is empty \n")
+
+	}
+	for key, value := range data {
+
 		t.Data = strings.ReplaceAll(t.Data, key, value)
 	}
 	return t
 }
+func (t *UCProcess) ProcessVRD() UC {
+	var (
+		logger = t.Logger
+		data   = t.KBVRDData
+	)
+	if len(data) == 0 {
+		logger.Fatalf("\n  t.KBData is empty \n")
 
+	}
+	for key, value := range data {
+
+		t.Data = strings.ReplaceAll(t.Data, key, value)
+	}
+	return t
+}
 func (t *UCProcess) Export() string {
 	var (
 		logger = t.Logger
 	)
 
 	if len(t.Data) == 0 {
-		logger.Fatalf("\nt.Data = %v t.KBData = %v\n", t.Data, t.KBData)
+		logger.Fatalf("\nt.Data or t.KBData is empty\n")
 	}
 	return t.Data
 }

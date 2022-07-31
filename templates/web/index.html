@@ -7,18 +7,40 @@
     <title>SQL uploader</title>
 </head>
 <body>
+<div>
+    <div style="padding: 40px">
 <form
         enctype="multipart/form-Data"
-        action="http://localhost:8080/upload"
+        action="http://localhost:8080/uploadFile"
         method="post"
 >
-    <!--<input type="file" name="myFile" /> -->
+
     <label>
-        <input style="width:600px; height:700px" type="text" name="myFile"/>
+        <input type="file" name="myFile"/>
     </label>
-    <br>
-    <input type="submit" value="upload" />
+
+    <input type="submit" value="upload file" />
 
 </form>
+</div>
+<div style="padding: 40px">
+<form
+        enctype="multipart/form-Data"
+        action="http://localhost:8080/uploadText"
+        method="post"
+>
+
+    <label>
+        <textarea style=" white-space: pre-line;height: 800px;width: 500px;"  name="myText" >
+        </textarea>
+    </label>
+    <br>
+    <input type="submit" value="upload text" />
+
+</form>
+    </div>
+</div>
+<!--<div>{{.Title}}</div>> -->
+
 </body>
 </html>

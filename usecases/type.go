@@ -5,7 +5,9 @@ import (
 )
 
 type UCProcess struct {
-	Data   string
-	KBData map[string]string
-	Logger *logrus.Logger
+	Envdata   map[string]string
+	Data      string
+	KBData    map[string]string
+	KBVRDData map[string]string
+	Logger    *logrus.Logger
 }
